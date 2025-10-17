@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author; // Jangan lupa import modelnya
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
     public function index()
     {
-        $data = new Author(); // Membuat objek baru dari model Author
-        $authors = $data->getAuthors(); // Mengambil data authors
-        return view('authors', ['authors' => $authors]); // Mengirim data ke view 'author'
+        $authors = Author::all();
+        return response()->json([
+            "success" => true,
+            "message" => "Data Penulis Berhasil Diambil",
+            "data" => $authors
+        ], 200);
     }
 }

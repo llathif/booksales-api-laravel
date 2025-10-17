@@ -9,8 +9,11 @@ class GenreController extends Controller
 {
     public function index()
     {
-        $data = new Genre(); // Membuat objek baru dari model Genre
-        $genres = $data->getGenres(); // Mengambil data genres
-        return view('genres', ['genres' => $genres]); // Mengirim data ke view 'genre'
+        $genres = Genre::all();
+        return response()->json([
+            "success" => true,
+            "message" => "Data Genre Berhasil Diambil",
+            "data" => $genres
+        ], 200);
     }
 }
